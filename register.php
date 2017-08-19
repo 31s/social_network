@@ -1,10 +1,14 @@
 
 <?php
+
+require('config/database.php');
+require('includes/function.php');
+
     // Si le formulaire a été soumis
     if(isset($_POST['register'])) {
 
         // Si tous les champs ont été remplis
-        if(!empty($_POST['name']) && !empty($_POST['pseudo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['password_confirm'])) {
+        if(not_empty(['name', 'pseudo', 'email', 'password', 'password_confirm'])) {
 
             $errors = [];
 

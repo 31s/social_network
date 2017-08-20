@@ -3,6 +3,8 @@
 
 require('config/database.php');
 require('includes/function.php');
+require('includes/constants.php');
+
 
     // Si le formulaire a été soumis
     if(isset($_POST['register'])) {
@@ -40,9 +42,21 @@ require('includes/function.php');
 
             if(count($errors) == 0) {
                 // Envoi mail d'activation
+                $to = $email;
+                $subject = WEBSITE_NAME." - ACTIVATION DE COMPTE";
+                $token = sha1($pseudo.$email.$password);
+
+                ob_start();
+                require('templates/emails/activation.tmpl.php');
+                $content = ob_get_clean();
+
+                $headers = 'MIME-Version: 1.0' . "\r\n";
+                $headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+                mail($to, $subject, $content, $headers);
 
                 // Informer utilisateur pour verifier mail
-
+                echo "Maild'activation envoyé !";
             }
 
         } else {

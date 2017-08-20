@@ -23,7 +23,7 @@ if(!function_exists('is_already_in_use')) {
 
         $count = $q->rowcount();
 
-        $q->closeCurser();
+        $q->closeCursor();
 
         return $count;
     }

@@ -1,6 +1,5 @@
 
 <?php $title="Inscription"; ?>
-<?php include('includes/constants.php'); ?>
 <?php include('partials/_header.php'); ?>
 
 <div id="main-content">
@@ -9,7 +8,7 @@
 
         <h1>Devenez dès à présent membre !</h1>
 
-        <form action="post" class="well col-md-6">
+        <form method="post" class="well col-md-6">
 
             <!-- Name field -->
             <div class="form-group">

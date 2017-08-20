@@ -56,7 +56,7 @@ require('includes/constants.php');
                 mail($to, $subject, $content, $headers);
 
                 // Informer utilisateur pour verifier mail
-                echo "Maild'activation envoyé !";
+                echo "Mail d'activation envoyé !";
             }
 
         } else {

@@ -1,6 +1,7 @@
 
 <?php
 
+session_start();
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');
 require('config/database.php');
 require('includes/function.php');
@@ -43,7 +44,7 @@ require('includes/constants.php');
 
             if(count($errors) == 0) {
                 // Envoi mail d'activation
-                $to = $email;
+                
                 $subject = WEBSITE_NAME." - ACTIVATION DE COMPTE";
                 $token = sha1($pseudo.$email.$password);
 
@@ -51,47 +52,27 @@ require('includes/constants.php');
                 require('templates/emails/activation.tmpl.php');
                 $content = ob_get_clean();
 
-                $headers = 'MIME-Version: 1.0' . "\r\n";
-                $headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-
+                //$to = $email;
+                //$headers = 'MIME-Version: 1.0' . "\r\n";
+                //$headers = 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
                 //mail($to, $subject, $content, $headers);
-
-                // Informer utilisateur pour verifier mail
-                echo "Mail d'activation envoyé !";
-
-                function smtpmailer($to, $from, $from_name, $subject, $body) { 
-                    global $error;
-                    $mail = new PHPMailer();  // create a new object
-                    $mail->IsSMTP(); // enable SMTP
-                    $mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
-                    $mail->SMTPAuth = true;  // authentication enabled
-                    $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->Port = 465; 
-                    $mail->Username = '31s.duranteau@gmail.com';  
-                    $mail->Password = 'idcommunication';           
-                    $mail->SetFrom($from, $from_name);
-                    $mail->Subject = $subject;
-                    $mail->Body = $body;
-                    $mail->IsHTML(true); 
-                    $mail->AddAddress($to);
-                    if(!$mail->Send()) {
-                        $error = 'Mail error: '.$mail->ErrorInfo; 
-                        return false;
-                    } else {
-                        $error = 'Message sent!';
-                        return true;
-                    }
-                }
-
-                 	
+                
                 smtpmailer($email, 'from@mail.com', 'Social Network', $subject, $content);
 
+                // Informer utilisateur pour verifier mail
+                set_flash("Mail d'activation envoyé !", 'success');
+                redirect('index.php');
+
+            } else {
+                save_input_data();
             }
 
         } else {
             $errors[] = "Veuillez SVP remplir tous les champs";
+            save_input_data();
         }
+    } else {
+        clear_input_data();
     }
 
 ?>

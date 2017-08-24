@@ -1,5 +1,6 @@
 <?php
 
+// sanitizer 
 if(!function_exists('e')) {
     function e($string) {
         if($string) {
@@ -8,7 +9,44 @@ if(!function_exists('e')) {
     }
 }
 
+// recupere valeur session suivant la clef
+if(!function_exists('get_session')) {
+    function get_session($key) {
+        if(key) {
+            return !empty($_SESSION[$key])
+            ? e($_SESSION[$key])
+            : null;
+        }        
+    }
+}
 
+
+// avatar url
+if(!function_exists('get_avatar_url')) {
+    function get_avatar_url($email) {
+        return "http://gravatar.com/avatar/".md5(strtolower(trim(e($email))));
+    }
+}
+
+
+// trouver l'utilisateur par son id
+if(!function_exists('find_user_by_id')) {
+    function find_user_by_id($id) {
+        global $db;
+
+        $q = $db->prepare('SELECT name, pseudo, email, city, country, twitter, github, sex, bio FROM users WHERE id = ?');
+        $q->execute([$id]);
+
+        $data = current($q->fetchAll(PDO::FETCH_OBJ));
+
+        $q->closeCursor();
+
+        return $data;
+    }
+}
+
+
+// verifier que le champs n'est pas vide
 if(!function_exists('not_empty')) {
     function not_empty($fields = []) {
             if(count($fields) != 0) {

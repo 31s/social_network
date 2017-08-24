@@ -23,6 +23,8 @@ if(!empty($_GET['p']) && is_already_in_use('pseudo', $_GET['p'], 'users') && !em
         $q = $db->prepare("UPDATE users SET active = '1' WHERE pseudo = ?");
         $q->execute([$pseudo]);
 
+        set_flash('Votre a été activé');
+
         redirect('login.php');
         
     } else {

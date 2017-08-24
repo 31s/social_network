@@ -2,9 +2,11 @@
 <?php
 
 session_start();
+
+include('filters/guest_filter.php');
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');
 require('config/database.php');
-require('includes/function.php');
+require('includes/functions.php');
 require('includes/constants.php');
 
 

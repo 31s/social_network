@@ -1,4 +1,6 @@
 
+
+
 <!-- Static navbar -->
 <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -13,9 +15,9 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="index.php">Accueil</a></li>
-              <li><a href="#">Connexion</a></li>
-              <li><a href="register.php">Inscription</a></li>
+              <li class="<?= set_active('index') ?>"><a href="index.php">Accueil</a></li>
+              <li class="<?= set_active('login') ?>"><a href="login.php">Connexion</a></li>
+              <li class="<?= set_active('register') ?>"><a href="register.php">Inscription</a></li>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
 </nav>

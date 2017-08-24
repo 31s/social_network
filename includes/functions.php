@@ -98,10 +98,26 @@ if(!function_exists('get_input')) {
     }
 }
 
+// effacer les sessions de input
 if(!function_exists('clear_input_data')) {
     function clear_input_data() {
         if(isset($_SESSION['input'])) {
             $_SESSION['input'] = [];
+        }
+    }
+}
+
+
+// Gère l'état actif des différent liens
+if(!function_exists('set_active')) {
+    function set_active($file) {
+        $path = explode('/', $_SERVER['SCRIPT_NAME']);
+        $page = array_pop($path);
+
+        if($page == $file.'.php') {
+            return "active";
+        } else {
+            return "";
         }
     }
 }

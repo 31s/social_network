@@ -10,7 +10,7 @@
 
         <?php include('partials/_errors.php')  ?>
 
-        <form method="post" class="well col-md-6">
+        <form data-parsley-validate method="post" class="well col-md-6">
 
             <!-- Name field -->
             <div class="form-group">
@@ -21,13 +21,13 @@
             <!-- Pseudo field -->
             <div class="form-group">
                 <label class="control-label" for="pseudo">Pseudo:</label>
-                <input type="text" value="<?= get_input('pseudo') ?>" class="form-control" id="pseudo" name="pseudo" required="required" />
+                <input type="text" value="<?= get_input('pseudo') ?>" class="form-control" id="pseudo" name="pseudo" required="required" data-parsley-minlength="3"/>
             </div>
 
             <!-- Email field -->
             <div class="form-group">
                 <label class="control-label" for="email">Email:</label>
-                <input type="email" value="<?= get_input('email') ?>" class="form-control" id="email" name="email" required="required" />
+                <input type="email" value="<?= get_input('email') ?>" class="form-control" id="email" name="email" required="required" data-parsley-trigger="keypress"/>
             </div>
 
             <!-- Password field -->
@@ -39,7 +39,7 @@
             <!-- Password confirmation field -->
             <div class="form-group">
                 <label class="control-label" for="password_confirm">Confirmez votre mot de passe:</label>
-                <input type="password" class="form-control" id="password_confirm" name="password_confirm" required="required" />
+                <input type="password" class="form-control" id="password_confirm" name="password_confirm" required="required" data-parsley-equalto="#password"/>
             </div>
 
             <input type="submit" class="btn btn-primary" value="Inscription" name="register" />

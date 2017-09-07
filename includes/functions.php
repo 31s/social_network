@@ -12,11 +12,19 @@ if(!function_exists('e')) {
 // recupere valeur session suivant la clef
 if(!function_exists('get_session')) {
     function get_session($key) {
-        if(key) {
+        if($key) {
             return !empty($_SESSION[$key])
             ? e($_SESSION[$key])
             : null;
         }        
+    }
+}
+
+
+// verifie si l'utilisateur est connecté
+if(!function_exists('is_logged_in')) {
+    function is_logged_in() {
+        return isset($_SESSION['user_id']) || isset($_SESSION['pseudo']);
     }
 }
 
@@ -61,6 +69,7 @@ if(!function_exists('not_empty')) {
 }
 
 
+// si existe déjà
 if(!function_exists('is_already_in_use')) {
     function is_already_in_use($field, $value, $table) {
         global $db;
@@ -77,6 +86,7 @@ if(!function_exists('is_already_in_use')) {
 }
 
 
+// function pour faire fonctionner phpmailer
 function smtpmailer($to, $from, $from_name, $subject, $body) { 
     global $error;
     $mail = new PHPMailer();  // create a new object
@@ -103,6 +113,7 @@ function smtpmailer($to, $from, $from_name, $subject, $body) {
 }
 
 
+// affichage message  erreur ou reussite
 if(!function_exists('set_flash')) {
     function set_flash($message, $type = 'info') {
         $_SESSION['notification']['message'] = $message;
@@ -111,6 +122,7 @@ if(!function_exists('set_flash')) {
 }
 
 
+// redirection 
 if(!function_exists('redirect')) {
     function redirect($page) {
         header('Location: ' . $page);
@@ -119,6 +131,7 @@ if(!function_exists('redirect')) {
 }
 
 
+// sauvegarder les informations après validation à réafficher en cas d'erreur
 if(!function_exists('save_input_data')) {
     function save_input_data() {
         foreach($_POST as $key => $value) {
@@ -128,6 +141,8 @@ if(!function_exists('save_input_data')) {
     }
 }
 
+
+// afficher les infos 
 if(!function_exists('get_input')) {
     function get_input($key) {
         return !empty($_SESSION['input'][$key])

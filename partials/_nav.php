@@ -18,7 +18,8 @@
               <li class="<?= set_active('profile') ?>">
                 <a href="profile.php?id=<?= get_session('user_id') ?>">Mon profil</a>
               </li>
-			  <li><a href="logout.php">Deconnexion</a></li>
+              <li class="<?= set_active('share_code') ?>"><a href="share_code.php">Partager</a></li>
+			        <li><a href="logout.php">Deconnexion</a></li>
             <?php else: ?>
               <li class="<?= set_active('login') ?>"><a href="login.php">Connexion</a></li>
               <li class="<?= set_active('register') ?>"><a href="register.php">Inscription</a></li>

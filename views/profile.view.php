@@ -14,7 +14,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-5">
-                        <img src="<?= get_avatar_url($user->email) ?>" alt="Image de profil de <?= e($user->pseudo) ?>" class="img-circle">
+                        <img src="<?= get_avatar_url($user->email, 100) ?>" alt="Image de profil de <?= e($user->pseudo) ?>" class="img-circle">
                     </div>                
                 </div>
                 <div class="row">
@@ -60,6 +60,7 @@
         </div>
       </div>
       
+      <?php if(!empty($_GET['id']) && $_GET['id'] === get_session('user_id')): ?>
       <div class="col-md-6">
           <div class="panel panel-default">
               <div class="panel-heading">
@@ -140,7 +141,8 @@
                 </form>              
             </div>
           </div>
-      </div>    
+      </div> 
+      <?php endif; ?>  
     </div>
   </div><!-- /.container -->
 

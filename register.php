@@ -4,6 +4,7 @@
 session_start();
 
 include('filters/guest_filter.php');
+require("bootstrap/locale.php");
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');
 require('config/database.php');
 require('includes/functions.php');

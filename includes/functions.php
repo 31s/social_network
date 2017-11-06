@@ -29,6 +29,31 @@ if(!function_exists('get_session')) {
 } */
 
 
+/* // hash le mot de passe
+if(!function_exists('bcrypt_hash_password')) {
+    function bcrypt_hash_password($value, $options = array()) {
+        
+        $cost = isset($options['rounds']) ? $options['rounds'] : 10;
+        
+        $hash = password_hash($value, PASSWORD_BCRYPT, array('cost' => $cost));
+
+        if ($hash === false) {
+            throw new Exception("Bcrypt hashing n'est pas supporte");
+        }
+
+        return $hash;
+    }
+}
+
+
+// verifie le mot de passe
+if(!function_exists('bcrypt_verify_password')) {
+    function bcrypt_verify_password($value, $hashedValue) {
+        return password_verify($value, $hashedValue);
+    }
+} */
+
+
 // verifie si l'utilisateur est connecté
 if(!function_exists('is_logged_in')) {
     function is_logged_in() {

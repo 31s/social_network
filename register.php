@@ -49,7 +49,7 @@ require('includes/constants.php');
                 // Envoi mail d'activation
                 
                 $subject = WEBSITE_NAME." - ACTIVATION DE COMPTE";
-                $password = sha1($password);
+                $password = password_hash($password, PASSWORD_BCRYPT);
                 $token = sha1($pseudo.$email.$password);
 
                 ob_start();

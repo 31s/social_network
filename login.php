@@ -19,18 +19,15 @@ require('includes/constants.php');
 
             extract($_POST);
 
-            $q = $db->prepare("SELECT id, pseudo, email FROM users WHERE pseudo = :identifiant OR email = :identifiant AND password = :password AND active = '1' ");
+            $q = $db->prepare("SELECT id, pseudo, password AS hashed_password, email FROM users WHERE (pseudo = :identifiant OR email = :identifiant) AND active = '1' ");
 
             $q->execute([
-                'identifiant' => $identifiant,
-                'password' => sha1($password)
+                'identifiant' => $identifiant
             ]);
 
-            $userHasBennFound = $q->rowCount();
+            $user = $q->fetch(PDO::FETCH_OBJ);
 
-            if($userHasBennFound) {
-
-                $user = $q->fetch(PDO::FETCH_OBJ);
+            if($user && password_verify($password, $user->hashed_password)) {
 
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['pseudo'] = $user->pseudo;

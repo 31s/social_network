@@ -11,8 +11,13 @@
             <a class="navbar-brand" href="index.php"><?= WEBSITE_NAME ?></a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="list_users.php">Liste des utilisateurs</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="<?= set_active('index') ?>"><a href="index.php"><?= $menu['accueil'][$_SESSION['locale']]; ?></a></li>
+                <!-- <li class="<?= set_active('index') ?>">
+                    <a href="index.php"><?= $menu['accueil'][$_SESSION['locale']]; ?></a>
+                </li> -->
 
             <?php if (is_logged_in()) : ?>
 
@@ -29,14 +34,18 @@
               </div>
             </li> -->
             
-              <li class="<?= set_active('profile') ?>">
-                <a href="profile.php?id=<?= get_session('user_id') ?>"><?= $menu['mon_profil'][$_SESSION['locale']]; ?></a>
-              </li>
-              <li class="<?= set_active('edit_user') ?>">
-                <a href="edit_user.php?id=<?= get_session('user_id') ?>"><?= $menu['editer_profil'][$_SESSION['locale']]; ?></a>
-              </li>
-              <li class="<?= set_active('share_code') ?>"><a href="share_code.php"><?= $menu['share_code'][$_SESSION['locale']]; ?></a></li>
-                    <li><a href="logout.php"><?= $menu['deconnexion'][$_SESSION['locale']]; ?></a></li>
+                <li class="<?= set_active('profile') ?>">
+                    <a href="profile.php?id=<?= get_session('user_id') ?>"><?= $menu['mon_profil'][$_SESSION['locale']]; ?></a>
+                </li>
+                <li class="<?= set_active('edit_user') ?>">
+                    <a href="edit_user.php?id=<?= get_session('user_id') ?>"><?= $menu['editer_profil'][$_SESSION['locale']]; ?></a>
+                </li>
+                <li class="<?= set_active('share_code') ?>">
+                    <a href="share_code.php"><?= $menu['share_code'][$_SESSION['locale']]; ?></a>
+                </li>
+                <li>
+                    <a href="logout.php"><?= $menu['deconnexion'][$_SESSION['locale']]; ?></a>
+                </li>
             <?php else : ?>
               <li class="<?= set_active('login') ?>"><a href="login.php"><?= $menu['connexion'][$_SESSION['locale']]; ?></a></li>
               <li class="<?= set_active('register') ?>"><a href="register.php"><?= $menu['inscription'][$_SESSION['locale']]; ?></a></li>

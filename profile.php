@@ -15,6 +15,13 @@ if(!empty($_GET['id'])) {
 
     if(!$user) {
         redirect('index.php');
+    } else {
+        $q = $db->prepare('SELECT content, created_at FROM microposts WHERE user_id = :user_id ORDER BY created_at DESC');
+        $q->execute([
+            'user_id' => get_session('user_id')
+        ]);
+
+        $microposts = $q->fetchAll(PDO::FETCH_OBJ);
     }
 
 } else {

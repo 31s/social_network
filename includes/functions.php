@@ -9,6 +9,21 @@ if(!function_exists('e')) {
     }
 }
 
+
+// redirection friendly 
+if(!function_exists('redirect_intent_or')) {
+    function redirect_intent_or($default_url) {
+        if($_SESSION['forwading_url']) {
+            $url = $_SESSION['forwading_url'];
+        } else {
+            $url = $default_url;
+        }
+        $_SESSION['forwading_url'] = null;
+        redirect($url);
+    }
+}
+
+
 // recupere valeur session suivant la clef
 if(!function_exists('get_session')) {
     function get_session($key) {

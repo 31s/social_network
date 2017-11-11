@@ -2,11 +2,7 @@
 
 session_start();
 
-require("bootstrap/locale.php");
-require("config/database.php");
-require("includes/functions.php");
-require('includes/constants.php');
-
+require("includes/init.php");
 
 
 $req = $db->query("SELECT id FROM users WHERE active='1'");

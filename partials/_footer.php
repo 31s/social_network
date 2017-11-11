@@ -4,7 +4,7 @@
     <script src="libraries/parsley/parsley.min.js" ></script>
     <script src="libraries/parsley/i18n/fr.js" ></script>
     <script>
-      window.ParsleyValidator.setLocale('fr');
+      window.Parsley.setLocale('fr');
     </script>
   </body>
 </html>

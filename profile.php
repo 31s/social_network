@@ -2,11 +2,8 @@
 
 session_start();
 
-require("bootstrap/locale.php");
+require("includes/init.php");
 include('filters/auth_filter.php');
-require("config/database.php");
-require("includes/functions.php");
-require('includes/constants.php');
 
 
 if(!empty($_GET['id'])) {

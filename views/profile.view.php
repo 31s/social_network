@@ -15,7 +15,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-5">
-                            <img src="<?= get_avatar_url($user->email, 100) ?>" alt="Image de profil de <?= e($user->pseudo) ?>" class="img-circle">
+                            <img src="<?= $user->avatar ? $user->avatar : get_avatar_url($user->email, 100) ?>" alt="Image de profil de <?= e($user->pseudo) ?>" class="avatar-md">
                         </div>                
                     </div>
                     <div class="row">

@@ -3,12 +3,9 @@
 
 session_start();
 
+require("includes/init.php");
 include('filters/guest_filter.php');
-require("bootstrap/locale.php");
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');
-require('config/database.php');
-require('includes/functions.php');
-require('includes/constants.php');
 
 
     // Si le formulaire a été soumis

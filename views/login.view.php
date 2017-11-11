@@ -24,6 +24,15 @@
                 <input type="password" class="form-control" id="password" name="password" required="required" />
             </div>
 
+            <!-- remember me -->
+            <div class="form-group">
+                <label class="control-label" for="remember_me">
+                    <input type="checkbox" name="remember_me" id="remember_me">
+                    Garder ma session active
+                </label>
+                
+            </div>
+
             <input type="submit" class="btn btn-primary" value="Connexion" name="login" />
 
         </form>

@@ -22,7 +22,7 @@
             <?php if (is_logged_in()) : ?>
 
             <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><img src="<?= get_avatar_url(get_session('email')) ?>" alt="Image de profil de <?= get_session('pseudo') ?>" class="img-circle"> <span class="caret"></span></a>
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes"><img src="<?= get_session('avatar') ? get_session('avatar') : get_avatar_url(get_session('email')) ?>" alt="Image de profil de <?= get_session('pseudo') ?>" class="avatar-xs"> <span class="caret"></span></a>
               <div class="dropdown-menu" aria-labelledby="themes">
                 <a class="dropdown-item" href="../default/">Default</a>
                 <div class="dropdown-divider"></div>

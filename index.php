@@ -7,6 +7,6 @@ session_start();
 
 //include('filters/auth_filter.php');
 
-require("bootstrap/locale.php");
-require("includes/functions.php");
+require("includes/init.php");
+
 require("views/index.view.php");

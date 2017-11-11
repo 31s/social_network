@@ -1,6 +1,6 @@
 <article class="media status-media">
     <div class="pull-left">
-        <img src="<?= get_avatar_url($user->email) ?>" alt="<?= $user->pseudo ?>" class="media-object">
+        <img src="<?= $user->avatar ? $user->avatar : get_avatar_url($user->email) ?>" alt="<?= $user->pseudo ?>" class="media-object avatar-xs">
     </div>
     <div class="media-body">
         <h4 class="media-heading"><?= e($user->pseudo) ?></h4>

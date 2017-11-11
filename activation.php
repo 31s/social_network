@@ -2,10 +2,8 @@
 
 session_start();
 
-require("bootstrap/locale.php");
+require("bootstrap/init.php");
 include('filters/guest_filter.php');
-require("config/database.php");
-require("includes/functions.php");
 
 if(!empty($_GET['p']) && is_already_in_use('pseudo', $_GET['p'], 'users') && !empty($_GET['token'])) {
 

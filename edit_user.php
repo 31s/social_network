@@ -2,11 +2,8 @@
 
 session_start();
 
-require("bootstrap/locale.php");
+require("includes/init.php");
 include('filters/auth_filter.php');
-require("config/database.php");
-require("includes/functions.php");
-require('includes/constants.php');
 
 
 if( !empty($_GET['id']) && $_GET['id'] === get_session('user_id') ) {
@@ -54,6 +51,5 @@ if (isset($_POST['update'])) {
 } else {
     clear_input_data();
 }
-
 
 require("views/edit_user.view.php");

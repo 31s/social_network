@@ -31,6 +31,14 @@
                                 </div>                  
                             </div>
                             <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="avatar">Changer mon avatar</label>
+                                        <input type="file" name="avatar" id="avatar" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="country">Pays<span class="text-danger">*</span></label>
@@ -94,3 +102,40 @@
 </div>
 
 <?php include('partials/_footer.php'); ?>
+
+<script type="text/javascript" src="libraries/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="libraries/alertifyjs/alertify.min.js"></script>
+
+<script type="text/javascript">
+
+    <?php $timestamp = time();?>
+
+        $(function() {
+            $('#avatar').uploadify({
+                'buttonText' : 'Parcourir',
+                'fileObjName' : 'avatar',
+                'fileTypeDesc' : 'Images Files',
+                'fileTypeExts' : '*.gif; *.jpg; *.png; *.jpeg',
+                'formData'     : {
+                    'timestamp' : '<?php echo $timestamp;?>',
+                    'token'     : '<?php echo md5('unique_salt' . $timestamp);?>',
+                    'user_id'   : "<?= get_session('user_id') ?>",
+                    '<?php echo session_name();?>' : '<?php echo session_id();?>'
+                },
+                'swf'      : 'libraries/uploadify/uploadify.swf',
+                'uploader' : 'libraries/uploadify/uploadify.php',
+                'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+                    alertiy.error("Erreur lors de l'upload du fichier. Veuillez reéssayer SVP ");
+                },
+                'onUploadSuccess' : function(file, data, response) {
+                    alertify.success("Votre avatar a été uploadé avec succès !");
+                    setTimeout(function() {
+                        window.location = 'profile.php';
+                    }, 1500)
+                }
+
+
+            });
+        });
+
+</script>

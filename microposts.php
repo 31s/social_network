@@ -2,11 +2,8 @@
 
 session_start();
 
-require("bootstrap/locale.php");
-include('filters/auth_filter.php');
+require("includes/init.php");
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');
-require('config/database.php');
-require('includes/functions.php');
 
 
 if (isset($_POST['publish'])) {
@@ -17,7 +14,7 @@ if (isset($_POST['publish'])) {
 
         $q->execute([
             'content' => $content,
-            'user_id' => get_session('user_id')
+            'user_id' => $_GET['id']
         ]);
 
         set_flash('Votre statut a été mis à jour !');

@@ -3,12 +3,9 @@
 
 session_start();
 
-require("bootstrap/locale.php");
+require("includes/init.php");
 include('filters/guest_filter.php');
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');
-require('config/database.php');
-require('includes/functions.php');
-require('includes/constants.php');
 
 
     // Si le formulaire a été soumis
@@ -19,7 +16,7 @@ require('includes/constants.php');
 
             extract($_POST);
 
-            $q = $db->prepare("SELECT id, pseudo, password AS hashed_password, email FROM users WHERE (pseudo = :identifiant OR email = :identifiant) AND active = '1' ");
+            $q = $db->prepare("SELECT id, pseudo, avatar, password AS hashed_password, email FROM users WHERE (pseudo = :identifiant OR email = :identifiant) AND active = '1' ");
 
             $q->execute([
                 'identifiant' => $identifiant
@@ -31,7 +28,13 @@ require('includes/constants.php');
 
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['pseudo'] = $user->pseudo;
+                $_SESSION['avatar'] = $user->avatar;
                 $_SESSION['email'] = $user->email;
+
+                //si l'utilisateur veut garder la session active
+                if(isset($_POST['remember_me']) && $_POST['remember_me'] == 'on') {
+                    remember_me($user->id);
+                }
 
                 redirect_intent_or('profile.php?id='. $user->id);
             } else {

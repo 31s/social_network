@@ -37,6 +37,9 @@
                 <li class="<?= set_active('profile') ?>">
                     <a href="profile.php?id=<?= get_session('user_id') ?>"><?= $menu['mon_profil'][$_SESSION['locale']]; ?></a>
                 </li>
+                <li class="<?= set_active('change_password') ?>">
+                    <a href="change_password.php"><?= $menu['change_password'][$_SESSION['locale']]; ?></a>
+                </li>
                 <li class="<?= set_active('edit_user') ?>">
                     <a href="edit_user.php?id=<?= get_session('user_id') ?>"><?= $menu['editer_profil'][$_SESSION['locale']]; ?></a>
                 </li>

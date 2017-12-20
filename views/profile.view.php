@@ -10,13 +10,18 @@
             <div class="col-md-6">
                 <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Profil de <?= e($user->pseudo) ?></h3>
+                    <h3 class="panel-title">Profil de <?= e($user->pseudo) ?> (<?= friends_count($_GET['id']) ?> ami<?= friends_count($_GET['id']) <= 1 ? '' : 's' ?>)</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-5">
                             <img src="<?= $user->avatar ? $user->avatar : get_avatar_url($user->email, 100) ?>" alt="Image de profil de <?= e($user->pseudo) ?>" class="avatar-md">
-                        </div>                
+                        </div>
+                        <div class="col-md-7">
+                            <?php if(!empty($_GET['id']) && $_GET['id'] !== get_session('user_id')): ?>
+                                <?php include('partials/_relation_links.php'); ?>
+                            <?php endif; ?>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">

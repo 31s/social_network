@@ -3,6 +3,9 @@
 
 session_start();
 
+use PHPMailer\PHPMailer\PHPMailer;
+require '../vendor/autoload.php';
+
 require("includes/init.php");
 include('filters/guest_filter.php');
 require_once('config/PHPMailer-master/PHPMailerAutoload.php');

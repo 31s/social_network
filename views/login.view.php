@@ -42,3 +42,12 @@
 </div>
 
 <?php include('partials/_footer.php'); ?>
+
+<script src="assets/js/jquery.timeago.js"></script>
+<script src="assets/js/jquery.timeago.fr.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $(".timeago").timeago();
+    });
+</script>

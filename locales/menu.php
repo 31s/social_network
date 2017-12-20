@@ -2,6 +2,7 @@
 
     $menu = [
         "accueil"             => ['fr' => 'Accueil', 'en' => 'Home'],
+        "list_users"             => ['fr' => 'Liste des utilisateurs', 'en' => 'list users'],
         "connexion"           => ['fr' => 'Connexion', 'en' => 'Login'],
         "inscription"         => ['fr' => 'Inscription', 'en' => 'Register'],
         "mon_profil"          => ['fr' => 'Mon profil', 'en' => 'My account'],

@@ -14,7 +14,7 @@ if (isset($_POST['publish'])) {
 
         $q->execute([
             'content' => $content,
-            'user_id' => $_GET['id']
+            'user_id' => get_session('user_id')
         ]);
 
         set_flash('Votre statut a été mis à jour !');

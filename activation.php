@@ -10,7 +10,7 @@ if(!empty($_GET['p']) && is_already_in_use('pseudo', $_GET['p'], 'users') && !em
     $pseudo = $_GET['p'];
     $token = $_GET['token'];
 
-    $q = $db->prepare('SELECT email, password FROM users WHERE pseudo = ?');
+    $q = $db->prepare('SELECT id, email, password FROM users WHERE pseudo = ?');
     $q->execute([$pseudo]);
 
     $data = $q->fetch(PDO::FETCH_OBJ);
@@ -22,7 +22,15 @@ if(!empty($_GET['p']) && is_already_in_use('pseudo', $_GET['p'], 'users') && !em
         $q = $db->prepare("UPDATE users SET active = '1' WHERE pseudo = ?");
         $q->execute([$pseudo]);
 
-        set_flash('Votre a été activé');
+        $q = $db->prepare("INSERT INTO friends_relationships(user_id1, user_id2, status) VALUES(:user_id1, :user_id2, :status)");
+        $q->execute([
+            'user_id1' => $data->id, 
+            'user_id2' => $data->id, 
+            'status' => '2'
+            ]
+        );
+
+        set_flash('Votre compte a été activé');
 
         redirect('login.php');
         

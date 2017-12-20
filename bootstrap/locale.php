@@ -9,5 +9,9 @@
         }        
     }
 
-require 'locales/menu.php';
-require 'locales/long_text.php';
+
+// include all locales file
+$locales_files = glob("locales/*");
+foreach($locales_files as $file) {
+    require $file;
+}

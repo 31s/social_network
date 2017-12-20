@@ -5,6 +5,16 @@ body {
     padding-top: 70;
 }
 
+li.have_notifs > a {
+    color: red !important;
+    font-weight: bold;
+}
+
+.not_seen{
+    background-color: #f2f2f2;
+}
+    
+
 .avatar-md {
     border-radius: 100%;
     height: 100px;

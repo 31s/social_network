@@ -12,7 +12,7 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="list_users.php">Liste des utilisateurs</a></li>
+                <li><a href="list_users.php"><?= $menu['list_users'][$_SESSION['locale']]; ?></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <!-- <li class="<?= set_active('index') ?>">
@@ -33,7 +33,11 @@
                 <a class="dropdown-item" href="register.php">Inscription</a>
               </div>
             </li> -->
-            
+                <li class="<?= $notifications_count > 0 ? 'have_notifs' : '' ?>">
+                    <a href="notifications.php"><i class="fa fa-bell"></i>
+                        <?= $notifications_count > 0 ? "($notifications_count)" : ''; ?>
+                    </a>
+                </li>
                 <li class="<?= set_active('profile') ?>">
                     <a href="profile.php?id=<?= get_session('user_id') ?>"><?= $menu['mon_profil'][$_SESSION['locale']]; ?></a>
                 </li>

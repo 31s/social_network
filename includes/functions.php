@@ -10,6 +10,89 @@ if(!function_exists('e')) {
 }
 
 
+// checks if a friend request has already been sent
+if(!function_exists('if_a_friend_request_has_already_been_sent')) {
+    function if_a_friend_request_has_already_been_sent($id1, $id2) {
+        global $db;
+        
+        $q = $db->prepare("SELECT status FROM friends_relationships 
+                WHERE (user_id1 = :user_id1 AND user_id2 = :user_id2) 
+                OR (user_id1 = :user_id2 AND user_id2 = :user_id1)");
+        $q->execute([
+            'user_id1'=> $id1,
+            'user_id2' => $id2
+        ]);
+
+        $count = $q->rowCount();
+
+        $q->closeCursor();
+
+        return (bool) $count;
+    }
+}
+
+
+// Friends count 
+if(!function_exists('friends_count')) {
+    function friends_count($id) {
+        global $db;
+        
+        $q = $db->prepare("SELECT status FROM friends_relationships 
+                    WHERE (user_id1 = :user_connected OR user_id2 = :user_connected)
+                    AND status = '1'");
+        $q->execute([
+            'user_connected'=> $id
+            ]);
+
+        $count = $q->rowCount();
+
+        $q->closeCursor();
+
+        return $count;
+    }
+}
+
+
+// cheks if a friend request has already been_sent
+if(!function_exists('relation_link_to_display')) {
+    function relation_link_to_display($id) {
+        global $db;
+
+        $q = $db->prepare('SELECT user_id1, user_id2, status FROM friends_relationships 
+                WHERE (user_id1 = :user_id1 AND user_id2 = :user_id2) 
+                OR (user_id1 = :user_id2 AND user_id2 = :user_id1)');
+        $q->execute([
+            'user_id1' => get_session('user_id'),
+            'user_id2' => $id
+        ]);
+
+        $data = $q->fetch();
+
+        if($data['user_id2'] == $id && $data['status'] == '0') {
+            return "accept_reject_relation_link";
+        } elseif ($data['user_id1'] == get_session('user_id') && $data['status'] == '0') {
+            return "cancel_relation_link";
+        } elseif ( $data['status'] == '1') {
+            return "delete_relation_link";
+        } else {
+            return "add_relation_link";
+        }
+
+        $q->closeCursor();
+        die($data->status);
+    }
+}
+
+
+// remplace les liens par des liens cliquables
+if(!function_exists('replace_links')) {
+    function replace_links($texte) {
+        $regex_url = "/(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\:[0-9]+)?(\/\S*)?/";
+        return preg_replace($regex_url, "<a href=\"$0\" target=\"_blank\">$0</a>" , $texte);
+    }
+}
+
+
 // retourne le nombre d'enregistrement
 if(!function_exists('cell_count')) {
     function cell_count($table, $field_name, $field_value) {
@@ -236,7 +319,7 @@ if(!function_exists('is_already_in_use')) {
         $q = $db->prepare("SELECT id FROM $table WHERE $field = ?");
         $q->execute([$value]);
 
-        $count = $q->rowcount();
+        $count = $q->rowCount();
 
         $q->closeCursor();
 
@@ -248,13 +331,13 @@ if(!function_exists('is_already_in_use')) {
 // function pour faire fonctionner phpmailer
 function smtpmailer($to, $from, $from_name, $subject, $body) { 
     global $error;
-    $mail = new PHPMailer();  // create a new object
+    $mail = new PHPMailer;  // create a new object
     $mail->IsSMTP(); // enable SMTP
-    $mail->SMTPDebug = 0;  // debugging: 1 = errors and messages, 2 = messages only
+    $mail->SMTPDebug = 1;  // debugging: 1 = errors and messages, 2 = messages only
     $mail->SMTPAuth = true;  // authentication enabled
     $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
     $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 465; 
+    $mail->Port = 587; 
     $mail->Username = '31s.duranteau@gmail.com';  
     $mail->Password = 'idcommunication';           
     $mail->SetFrom($from, $from_name);

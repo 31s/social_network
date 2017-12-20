@@ -5,6 +5,6 @@
     <div class="media-body">
         <h4 class="media-heading"><?= e($user->pseudo) ?></h4>
         <p><i class="fa fa-clock-o"></i> <span class="timeago" title="<?= $micropost->created_at ?>"><?= $micropost->created_at ?></span> </p>
-        <?= nl2br(e($micropost->content))?>
+        <?= nl2br(replace_links(e($micropost->content)))?>
     </div>
 </article>
